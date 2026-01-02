@@ -16,7 +16,7 @@ namespace CareerOpportunity.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new logInForm());
+            Application.Run(new LogInForm());
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using CareerOpportunity.BLL;
+
 namespace CareerOpportunity.UI
 {
     public partial class LogInForm : Form
@@ -27,10 +29,11 @@ namespace CareerOpportunity.UI
 
         }
 
-        
+
 
         private void LogInForm_Load(object sender, EventArgs e)
         {
+
 
         }
 
@@ -43,6 +46,26 @@ namespace CareerOpportunity.UI
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnLogIn_Click(object sender, EventArgs e)
+        {
+            UserService service = new UserService();
+            string role = service.LogIn(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+            if (role == "Admin")
+            {
+                MessageBox.Show("Welcome Admin!");
+                //Open admin dashboard
+            }
+            else if (role == "User")
+            {
+                MessageBox.Show("Login successful!");
+                //Open user dashboard
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password.");
+            }
         }
     }
 }
