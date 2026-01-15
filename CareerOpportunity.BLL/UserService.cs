@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-
+using System.Data;
 using CareerOpportunity.Models;
 using CareerOpportunity.DAL;
 
@@ -43,6 +43,10 @@ namespace CareerOpportunity.BLL
                 {
                     return "You must agree to the terms and conditions.";
                 }
+                if (string.IsNullOrEmpty(user.Role))
+                {
+                    return "Please select a role.";
+                }
                 //user
                 if (repo.IsUserExists(user.UserName))
                 {
@@ -50,7 +54,7 @@ namespace CareerOpportunity.BLL
                 }
                 return "Valid";
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 
                 return "An error occurred during validation.";
@@ -64,27 +68,64 @@ namespace CareerOpportunity.BLL
             {
                 return validation;
             }
+            user.IsApproved = false;
 
             //adduser
             repo.AddUser(user);
-            return "Sign up successful!";
+            return "Sign up successful! Waiting for admin approval";
         }
 
-        public string LogIn(string userName, string password)
+        public User LogIn(string userName, string password)
         {
             if (userName == AdminUserName && password == AdminPassword)
             {
-                return "Admin";
+                return new User
+                {
+                    UserName = AdminUserName,
+                    Role = "Admin",
+                    IsApproved = true
+                };
             }
             //check db for regular user
-            bool validUser = repo.ValidateUser(userName, password);
-            if (validUser)
-            {
-                return "User";
+            User validUser = repo.ValidateUser(userName, password);
+            if (validUser != null && validUser.IsApproved) 
+            { 
+                return validUser; 
             }
-            return "Invalid username or password.";
+            return null; 
         }
 
+        public DataTable GetPendingUsers()
+        {
+            return repo.GetPendingUsers();
+        }
+        public string ApproveUser(int userId)
+        {
+            try
+            {
+                repo.ApproveUser(userId);
+                return "User approved successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "An error occurred while approving the user: " + ex.Message;
+            }
+        }
+        public string RejectUser(int userId)
+        {
+            try
+            {
+                repo.RejectUser(userId);
+                return "User rejected successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "An error occurred while rejecting the user: " + ex.Message;
+            }
+        }
 
     }
+
+
 }
+

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CareerOpportunity.BLL;
+using CareerOpportunity.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using CareerOpportunity.BLL;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace CareerOpportunity.UI
 {
@@ -50,22 +51,35 @@ namespace CareerOpportunity.UI
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
+
             UserService service = new UserService();
-            string role = service.LogIn(txtUserName.Text.Trim(), txtPassword.Text.Trim());
-            if (role == "Admin")
+            User user = service.LogIn(txtUserName.Text.Trim(),txtPassword.Text.Trim());
+
+            if(user == null)
             {
-                MessageBox.Show("Welcome Admin!");
-                //Open admin dashboard
+                MessageBox.Show("Invalid username or password or account not appeoved yet.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else if (role == "User")
+            
+            MessageBox.Show($"Role: {user.Role}\n Welcome {user.UserName}!", "Log In Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+
+            if (user.Role == "Admin") 
             {
-                MessageBox.Show("Login successful!");
-                //Open user dashboard
+                //admin dashboard
+                Approval approval = new Approval();
+                approval.Show();
             }
-            else
+            else if(user.Role == "User")
             {
-                MessageBox.Show("Invalid username or password.");
+                //user dashboard
             }
+            else if(user.Role== "Recruiter")
+            {
+                //recruiter dashbord
+            }
+
         }
+        
     }
 }

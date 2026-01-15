@@ -30,20 +30,20 @@ namespace CareerOpportunity.UI
                 {
                     UserName = txtUserName.Text.Trim(),
                     Password = txtPassword.Text.Trim(),
-                    Email = txtEmail.Text.Trim()
+                    Email = txtEmail.Text.Trim(),
+                    Role = roleComboBox.SelectedItem.ToString()
                 };
                 string confirmPassword = txtReEnterPassword.Text.Trim();
                 bool agreedTerms = checkboxCondition.Checked;
+               
 
                 string result = service.SignUp(newUser, confirmPassword, agreedTerms);
                 MessageBox.Show(result);
 
-                if (result == "Sign up successful!")
-                {
-                    LogInForm logInForm = new LogInForm();
-                    logInForm.Show();
-                    this.Close();
-                }
+                //if (result = "Sign up successful!")
+                
+                   
+                
             }
             catch (Exception ex)
             {
@@ -54,7 +54,33 @@ namespace CareerOpportunity.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            LogInForm logInForm = new LogInForm();
+            logInForm.Show();
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         
+            
+        }
+
+        private void roleComboBox_ControlAdded(object sender, ControlEventArgs e)
+        {
+
+        }
+
+        private void panelRight_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void SignUpForm_Load(object sender, EventArgs e)
+        {
+            roleComboBox.Items.Add("User");
+            roleComboBox.Items.Add("Recruiter");
+            roleComboBox.SelectedIndex = 0;
+           
         }
     }
 }
