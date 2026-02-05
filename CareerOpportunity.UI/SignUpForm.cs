@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using CareerOpportunity.Models;
 using CareerOpportunity.BLL;
-
 
 namespace CareerOpportunity.UI
 {
@@ -21,10 +12,25 @@ namespace CareerOpportunity.UI
             InitializeComponent();
         }
 
+        private void SignUpForm_Load(object sender, EventArgs e)
+        {
+            // Populate Dropdown
+            roleComboBox.Items.Clear();
+            roleComboBox.Items.Add("User");
+            roleComboBox.Items.Add("Recruiter");
+            roleComboBox.SelectedIndex = 0;
+        }
+
         private void btnSignup_Click(object sender, EventArgs e)
         {
             try
             {
+                if (roleComboBox.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select a role.");
+                    return;
+                }
+
                 UserService service = new UserService();
                 User newUser = new Models.User()
                 {
@@ -33,23 +39,23 @@ namespace CareerOpportunity.UI
                     Email = txtEmail.Text.Trim(),
                     Role = roleComboBox.SelectedItem.ToString()
                 };
-                string confirmPassword = txtReEnterPassword.Text.Trim();
-                bool agreedTerms = checkboxCondition.Checked;
-               
 
-                string result = service.SignUp(newUser, confirmPassword, agreedTerms);
+                string result = service.SignUp(newUser, txtReEnterPassword.Text.Trim(), checkboxCondition.Checked);
+
                 MessageBox.Show(result);
 
-                //if (result = "Sign up successful!")
-                
-                   
-                
+                // If success, go to login
+                if (result.StartsWith("Sign up successful"))
+                {
+                    LogInForm logInForm = new LogInForm();
+                    logInForm.Show();
+                    this.Hide();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,28 +65,8 @@ namespace CareerOpportunity.UI
             this.Close();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-         
-            
-        }
-
-        private void roleComboBox_ControlAdded(object sender, ControlEventArgs e)
-        {
-
-        }
-
-        private void panelRight_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void SignUpForm_Load(object sender, EventArgs e)
-        {
-            roleComboBox.Items.Add("User");
-            roleComboBox.Items.Add("Recruiter");
-            roleComboBox.SelectedIndex = 0;
-           
-        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void roleComboBox_ControlAdded(object sender, ControlEventArgs e) { }
+        private void panelRight_Paint(object sender, PaintEventArgs e) { }
     }
 }

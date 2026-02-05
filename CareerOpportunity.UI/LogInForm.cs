@@ -40,7 +40,7 @@ namespace CareerOpportunity.UI
 
         private void btnSignUp_Click_1(object sender, EventArgs e)
         {
-            SignUpForm signUpForm = new SignUpForm();
+            SignUpApplicant signUpForm = new SignUpApplicant();
             signUpForm.Show();
         }
 
@@ -67,19 +67,50 @@ namespace CareerOpportunity.UI
             if (user.Role == "Admin") 
             {
                 //admin dashboard
-                Approval approval = new Approval();
-                approval.Show();
+                AdminDashboard adminDashboard = new AdminDashboard();
+                adminDashboard.Show();
+                this.Hide();
             }
-            else if(user.Role == "User")
+            else if(user.Role == "Applicant")
             {
-                //user dashboard
+                this.Hide();
+                UserJob userJob = new UserJob(user.Id);
+                userJob.Show();
+                
+
             }
             else if(user.Role== "Recruiter")
             {
-                //recruiter dashbord
+                 Recuiter recuiter = new Recuiter(user.Id);
+                 recuiter.Show();
+                 this.Hide();
             }
 
         }
-        
+
+        private void lblOr_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRecruiter_Click(object sender, EventArgs e)
+        {
+            SignUpRecruiter signUpRecruiter = new SignUpRecruiter();
+            signUpRecruiter.Show();
+            this.Hide();
+            
+        }
+
+        private void btnSignUpApplicant_Click(object sender, EventArgs e)
+        {
+            SignUpApplicant signUpApplicant = new SignUpApplicant();
+            signUpApplicant.Show();
+            this.Hide();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

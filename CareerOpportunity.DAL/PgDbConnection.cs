@@ -9,7 +9,7 @@ namespace CareerOpportunity.DAL
 {
     public static class PgDbConnection
     {
-        private static string connectionString = "Host= localhost;Port=5432;Database=careerhunt;Username=postgres;Password=4343";
+        private static string connectionString = "Host=localhost;Port=1234;Database=IfteeDB;Username=postgres;Password=1234";
         public static NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(connectionString);

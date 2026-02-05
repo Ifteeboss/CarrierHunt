@@ -1,6 +1,6 @@
 ﻿namespace CareerOpportunity.UI
 {
-    partial class Approval
+    partial class ShowAllRecruiter
     {
         /// <summary>
         /// Required designer variable.
@@ -29,71 +29,78 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ApprovalDataGridView = new System.Windows.Forms.DataGridView();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.lblApprovalName = new System.Windows.Forms.Label();
+            this.dgvShowAllRecruiter = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.roleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.companyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isApprovedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnApprove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnReject = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.ApprovalDataGridView)).BeginInit();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvShowAllRecruiter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // ApprovalDataGridView
+            // btnExit
             // 
-            this.ApprovalDataGridView.AllowUserToAddRows = false;
-            this.ApprovalDataGridView.AllowUserToDeleteRows = false;
-            this.ApprovalDataGridView.AutoGenerateColumns = false;
-            this.ApprovalDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ApprovalDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ApprovalDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.ApprovalDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ApprovalDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.btnExit.BackColor = System.Drawing.Color.White;
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnExit.Location = new System.Drawing.Point(751, 10);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(47, 37);
+            this.btnExit.TabIndex = 18;
+            this.btnExit.Text = "X";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // lblApprovalName
+            // 
+            this.lblApprovalName.AutoSize = true;
+            this.lblApprovalName.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblApprovalName.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApprovalName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(151)))));
+            this.lblApprovalName.Location = new System.Drawing.Point(251, 13);
+            this.lblApprovalName.Name = "lblApprovalName";
+            this.lblApprovalName.Size = new System.Drawing.Size(266, 34);
+            this.lblApprovalName.TabIndex = 17;
+            this.lblApprovalName.Text = "Show All Recruiter ";
+            // 
+            // dgvShowAllRecruiter
+            // 
+            this.dgvShowAllRecruiter.AllowUserToAddRows = false;
+            this.dgvShowAllRecruiter.AllowUserToDeleteRows = false;
+            this.dgvShowAllRecruiter.AutoGenerateColumns = false;
+            this.dgvShowAllRecruiter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvShowAllRecruiter.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dgvShowAllRecruiter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvShowAllRecruiter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvShowAllRecruiter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.userNameDataGridViewTextBoxColumn,
             this.passwordDataGridViewTextBoxColumn,
             this.emailDataGridViewTextBoxColumn,
             this.roleDataGridViewTextBoxColumn,
-            this.isApprovedDataGridViewCheckBoxColumn,
-            this.btnApprove,
-            this.btnReject});
-            this.ApprovalDataGridView.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ApprovalDataGridView.DataSource = this.userBindingSource;
-            this.ApprovalDataGridView.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.ApprovalDataGridView.Location = new System.Drawing.Point(12, 54);
-            this.ApprovalDataGridView.MultiSelect = false;
-            this.ApprovalDataGridView.Name = "ApprovalDataGridView";
-            this.ApprovalDataGridView.ReadOnly = true;
-            this.ApprovalDataGridView.RowHeadersWidth = 51;
-            this.ApprovalDataGridView.RowTemplate.Height = 24;
-            this.ApprovalDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ApprovalDataGridView.Size = new System.Drawing.Size(850, 386);
-            this.ApprovalDataGridView.TabIndex = 0;
-            this.ApprovalDataGridView.BackgroundColorChanged += new System.EventHandler(this.ApprovalDataGridView_BackgroundColorChanged);
-            this.ApprovalDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ApprovalDataGridView_CellContentClick);
-            // 
-            // userBindingSource
-            // 
-            this.userBindingSource.DataSource = typeof(CareerOpportunity.Models.User);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRefresh.Font = new System.Drawing.Font("Courier New", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(705, 457);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(137, 40);
-            this.btnRefresh.TabIndex = 10;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.companyNameDataGridViewTextBoxColumn,
+            this.isApprovedDataGridViewCheckBoxColumn});
+            this.dgvShowAllRecruiter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvShowAllRecruiter.DataSource = this.userBindingSource;
+            this.dgvShowAllRecruiter.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dgvShowAllRecruiter.Location = new System.Drawing.Point(2, 55);
+            this.dgvShowAllRecruiter.MultiSelect = false;
+            this.dgvShowAllRecruiter.Name = "dgvShowAllRecruiter";
+            this.dgvShowAllRecruiter.ReadOnly = true;
+            this.dgvShowAllRecruiter.RowHeadersWidth = 51;
+            this.dgvShowAllRecruiter.RowTemplate.Height = 24;
+            this.dgvShowAllRecruiter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvShowAllRecruiter.Size = new System.Drawing.Size(777, 386);
+            this.dgvShowAllRecruiter.TabIndex = 16;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -135,6 +142,14 @@
             this.roleDataGridViewTextBoxColumn.Name = "roleDataGridViewTextBoxColumn";
             this.roleDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // companyNameDataGridViewTextBoxColumn
+            // 
+            this.companyNameDataGridViewTextBoxColumn.DataPropertyName = "CompanyName";
+            this.companyNameDataGridViewTextBoxColumn.HeaderText = "CompanyName";
+            this.companyNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.companyNameDataGridViewTextBoxColumn.Name = "companyNameDataGridViewTextBoxColumn";
+            this.companyNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // isApprovedDataGridViewCheckBoxColumn
             // 
             this.isApprovedDataGridViewCheckBoxColumn.DataPropertyName = "IsApproved";
@@ -145,54 +160,42 @@
             this.isApprovedDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.isApprovedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // btnApprove
+            // userBindingSource
             // 
-            this.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnApprove.HeaderText = "Approve";
-            this.btnApprove.MinimumWidth = 6;
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.ReadOnly = true;
-            this.btnApprove.Text = "Approve";
-            this.btnApprove.UseColumnTextForButtonValue = true;
+            this.userBindingSource.DataSource = typeof(CareerOpportunity.Models.User);
             // 
-            // btnReject
-            // 
-            this.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReject.HeaderText = "Reject";
-            this.btnReject.MinimumWidth = 6;
-            this.btnReject.Name = "btnReject";
-            this.btnReject.ReadOnly = true;
-            this.btnReject.Text = "Reject";
-            this.btnReject.UseColumnTextForButtonValue = true;
-            // 
-            // Approval
+            // ShowAllRecruiter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 509);
-            this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.ApprovalDataGridView);
-            this.Name = "Approval";
-            this.Text = "Approval";
-            this.Load += new System.EventHandler(this.Approval_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ApprovalDataGridView)).EndInit();
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.lblApprovalName);
+            this.Controls.Add(this.dgvShowAllRecruiter);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "ShowAllRecruiter";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ShowAllRecruiter";
+            this.Load += new System.EventHandler(this.ShowAllRecruiter_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvShowAllRecruiter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ApprovalDataGridView;
-        private System.Windows.Forms.BindingSource userBindingSource;
-        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label lblApprovalName;
+        private System.Windows.Forms.DataGridView dgvShowAllRecruiter;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn userNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn companyNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn isApprovedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn btnApprove;
-        private System.Windows.Forms.DataGridViewButtonColumn btnReject;
+        private System.Windows.Forms.BindingSource userBindingSource;
     }
 }

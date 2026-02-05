@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace CareerOpportunity.UI
 {
-    public partial class Approval : Form
+    public partial class ApprovalApplicant : Form
     {
         private readonly UserService service = new UserService();
-        public Approval()
+        public ApprovalApplicant()
         {
             InitializeComponent();
         }
@@ -24,29 +24,29 @@ namespace CareerOpportunity.UI
         private void ApprovalDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
-            string columnName = ApprovalDataGridView.Columns[e.ColumnIndex].Name;
-            int userId = Convert.ToInt32(ApprovalDataGridView.Rows[e.RowIndex].Cells[0].Value);
+            string columnName = ApplicantApprovalDataGridView.Columns[e.ColumnIndex].Name;
+            int userId = Convert.ToInt32(ApplicantApprovalDataGridView.Rows[e.RowIndex].Cells[0].Value);
           
             if(columnName == "btnApprove")
             {
                 string result = service.ApproveUser(userId);
-                MessageBox.Show(result,"",MessageBoxButtons.OK,MessageBoxIcon.Question);
+                MessageBox.Show(result,"Approval",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 
             }
             else if(columnName == "btnReject")
             {
                 string result = service.RejectUser(userId);
-                MessageBox.Show(result,"",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(result,"Rejection",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
 
             }
         }
 
-        private void LoadPendingUsers()
+        private void LoadPendingUsers(string role)
         {
             try
             {
                 
-                ApprovalDataGridView.DataSource = service.GetPendingUsers();
+                ApplicantApprovalDataGridView.DataSource = service.GetPendingUsers(role);
 
             }
             catch (Exception ex)
@@ -57,15 +57,27 @@ namespace CareerOpportunity.UI
 
         private void Approval_Load(object sender, EventArgs e)
         {
-            LoadPendingUsers();
+            LoadPendingUsers("Applicant");
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadPendingUsers();
+            LoadPendingUsers("Applicant");
         }
 
         private void ApprovalDataGridView_BackgroundColorChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            AdminDashboard adminDashboard = new AdminDashboard();
+            adminDashboard.Show();
+            this.Close();
+        }
+
+        private void lblApprovalName_Click(object sender, EventArgs e)
         {
 
         }

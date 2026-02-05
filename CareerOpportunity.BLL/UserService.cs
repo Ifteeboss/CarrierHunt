@@ -19,7 +19,7 @@ namespace CareerOpportunity.BLL
 
         private readonly UserRepository repo = new UserRepository();
 
-        public string ValidateSignUp(User user, string confirmPassword, bool agreedTrems)
+        public string ValidateApplicantSignUp(User user, string confirmPassword, bool agreedTerms)
         {
             try
             {
@@ -39,14 +39,11 @@ namespace CareerOpportunity.BLL
                 {
                     return "Password do not match.";
                 }
-                if (!agreedTrems)
+                if (!agreedTerms)
                 {
                     return "You must agree to the terms and conditions.";
                 }
-                if (string.IsNullOrEmpty(user.Role))
-                {
-                    return "Please select a role.";
-                }
+                
                 //user
                 if (repo.IsUserExists(user.UserName))
                 {
@@ -61,9 +58,49 @@ namespace CareerOpportunity.BLL
             }
         }
 
-        public string SignUp(User user, string confirmPassword, bool agreedTerms)
+        public string ValidateRecruiterSignUp(User user, string confirmPassword, bool agreedTerms)
         {
-            string validation = ValidateSignUp(user, confirmPassword, agreedTerms);
+            try
+            {
+                if (string.IsNullOrWhiteSpace(user.UserName) ||
+                    string.IsNullOrWhiteSpace(user.Password) ||
+                    string.IsNullOrWhiteSpace(user.Email)||
+                    string.IsNullOrWhiteSpace(user.CompanyName))
+                {
+                    return "All fields are required.";
+                }
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                if (!Regex.IsMatch(user.Email, emailPattern))
+                {
+                    return "Please enter a valid email address.";
+                }
+
+                if (user.Password != confirmPassword)
+                {
+                    return "Passwords do not match.";
+                }
+                if (!agreedTerms)
+                {
+                    return "You must agree to the terms and conditions.";
+                }
+
+                //user
+                if (repo.IsUserExists(user.UserName))
+                {
+                    return "Username already exists.";
+                }
+                return "Valid";
+            }
+            catch (Exception)
+            {
+
+                return "An error occurred during validation.";
+            }
+        }
+
+        public string SignUpApplicant(User user, string confirmPassword, bool agreedTerms)
+        {
+            string validation = ValidateApplicantSignUp(user, confirmPassword, agreedTerms);
             if (validation != "Valid")
             {
                 return validation;
@@ -71,8 +108,22 @@ namespace CareerOpportunity.BLL
             user.IsApproved = false;
 
             //adduser
-            repo.AddUser(user);
-            return "Sign up successful! Waiting for admin approval";
+            repo.AddApplicant(user);
+            return "Applicant Sign up successful! Waiting for admin approval";
+        }
+
+        public string SignUpRecruiter(User user, string confirmPassword, bool agreedTerms)
+        {
+            string validation = ValidateRecruiterSignUp(user, confirmPassword, agreedTerms);
+            if (validation != "Valid")
+            {
+                return validation;
+            }
+            user.IsApproved = false;
+
+            //adduser
+            repo.AddRecruiter(user);
+            return "Recruiter Sign up successful! Waiting for admin approval";
         }
 
         public User LogIn(string userName, string password)
@@ -95,16 +146,16 @@ namespace CareerOpportunity.BLL
             return null; 
         }
 
-        public DataTable GetPendingUsers()
+        public DataTable GetPendingUsers(string role)
         {
-            return repo.GetPendingUsers();
+            return repo.GetPendingUsers(role);
         }
         public string ApproveUser(int userId)
         {
             try
             {
-                repo.ApproveUser(userId);
-                return "User approved successfully.";
+
+                return repo.ApproveUser(userId); 
             }
             catch (Exception ex)
             {
@@ -115,8 +166,8 @@ namespace CareerOpportunity.BLL
         {
             try
             {
-                repo.RejectUser(userId);
-                return "User rejected successfully.";
+                
+                return repo.RejectUser(userId); ;
             }
             catch (Exception ex)
             {
@@ -124,6 +175,52 @@ namespace CareerOpportunity.BLL
             }
         }
 
+        public int GetPendingCount(string role)
+        {
+            try
+            {
+                DataTable pendingUsers = repo.GetPendingUsers(role);
+                return pendingUsers.Rows.Count;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching pending count: " + ex.Message);
+                return 0;
+            }
+        }
+
+        public User GetUserById(int userId)
+        {
+            return repo.GetUserById(userId);
+        }
+        public string UpdateUser(User user)
+        {
+            try
+            {
+                return repo.UpdateUser(user);
+            }
+            catch (Exception ex)
+            {
+                return "An error occurred while updating the user: " + ex.Message;
+            }
+        }
+        public string DeleteUser(int userId)
+        {
+            try
+            {
+
+                return repo.DeleteUser(userId); ;
+            }
+            catch (Exception ex)
+            {
+                return "An error occurred while rejecting the user: " + ex.Message;
+            }
+        }
+
+        public DataTable GetAllUsersByRole(string role)
+        {
+            return repo.GetAllUsersByRole(role);
+        }
     }
 
 
